@@ -1,4 +1,4 @@
-package util;
+package com.hyfacademy.util;
 
 public class GradeUtils {
     public static final int MODULE_PASS_MARK = 55;

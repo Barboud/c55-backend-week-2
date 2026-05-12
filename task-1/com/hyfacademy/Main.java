@@ -1,4 +1,5 @@
-import service.GradeService;
+package com.hyfacademy;
+import com.hyfacademy.service.GradeService;
 
 public class Main {
     public static void main(String[] args) {

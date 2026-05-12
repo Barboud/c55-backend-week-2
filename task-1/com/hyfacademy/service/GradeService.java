@@ -1,7 +1,7 @@
-package service;
+package com.hyfacademy.service;
 
-import model.Student;
-import util.GradeUtils;
+import com.hyfacademy.model.Student;
+import com.hyfacademy.util.GradeUtils;
 import java.util.Scanner;
 
 public class GradeService {

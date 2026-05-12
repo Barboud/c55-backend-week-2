@@ -1,6 +1,6 @@
-package model;
+package com.hyfacademy.model;
 
-import util.GradeUtils;
+import com.hyfacademy.util.GradeUtils;
 
 public class Student {
     private String name;
