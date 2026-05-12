@@ -1,7 +1,8 @@
-package com.hyfacademy;
+import service.GradeService;
 
 public class Main {
-    static void main(String[] args) {
-        System.out.println("Hello World!");
+    public static void main(String[] args) {
+        GradeService service = new GradeService();
+        service.run();
     }
 }
