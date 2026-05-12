@@ -156,3 +156,12 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
+
+
+# Java compiled files
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
