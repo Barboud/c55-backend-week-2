@@ -23,10 +23,16 @@ public class GradeService {
                 System.out.print("Enter a valid student name: ");
                 scanner.next();
             }
-
             String name = scanner.nextLine().trim();
-            students[studentCount] = new Student(name);
-            System.out.printf("Student %s with Id %s has been added.%n",students[studentCount].getName(), students[studentCount].getStudentId());
+
+            System.out.print("Enter the student E-Mail: ");
+            while (scanner.hasNextInt()) {
+                System.out.print("Enter a valid student E-Mail: ");
+                scanner.next();
+            }
+            String email = scanner.nextLine().trim();
+            students[studentCount] = new Student(name, email);
+            System.out.printf("Student %s with Id %s has been added.%n",students[studentCount].getName(), students[studentCount].getUserId());
             System.out.println("══════════════════════════════════════");
             studentCount++;
         }
@@ -57,7 +63,7 @@ public class GradeService {
             }
 
         }
-        System.out.printf("Grades for %s with Id %s have been added.%n",student.getName(), student.getStudentId());
+        System.out.printf("Grades for %s with Id %s have been added.%n",student.getName(), student.getUserId());
         System.out.println("══════════════════════════════════════");
     }
 
@@ -86,7 +92,7 @@ public class GradeService {
             if (passing) passingCount++;
 
             System.out.printf("  %-10s %-20s %-10.2f %-7c %-10s%n",
-                    student.getStudentId(),
+                    student.getUserId(),
                     student.getName(),
                     average,
                     letterGrade,
@@ -124,7 +130,7 @@ public class GradeService {
         System.out.println("══════════════════════════════════════");
         System.out.println("  STUDENT REPORT");
         System.out.println("══════════════════════════════════════");
-        System.out.printf("  ID      : %s%n", student.getStudentId());
+        System.out.printf("  ID      : %s%n", student.getUserId());
         System.out.printf("  Name    : %s%n", student.getName());
         System.out.println("──────────────────────────────────────");
         System.out.println("  MODULE GRADES");
@@ -150,7 +156,7 @@ public class GradeService {
 
     private Student findStudentById(String id) {
         for (int i = 0; i < studentCount; i++) { // only loop deepens in studentCount not entire array
-            if (students[i].getStudentId().equals(id)) {
+            if (students[i].getUserId().equals(id)) {
                 return students[i];
             }
         }
@@ -210,20 +216,23 @@ public class GradeService {
     // I use AI to generate this method to test viewStudentReport(),viewAllStudents()
     private void seedData() {
         String[] names = {"Alice van der Berg", "Bob Jansen", "Carol de Groot", "Dave Miller"};
+        String[] emails = {
+                "alice@mail.com",
+                "bob@mail.com",
+                "carol@mail.com",
+                "dave@mail.com"
+        };
         int[][] mockGrades = {
                 {88, 76, 91, 70, 87},
                 {50, 45, 60, 55, 52},
                 {95, 92, 100, 88, 90},
                 {60, 65, 70, 58, 62}
         };
-
         for (int i = 0; i < names.length; i++) {
-            students[studentCount] = new Student(names[i]);
-
+            students[studentCount] = new Student(names[i], emails[i]);
             for (int j = 0; j < mockGrades[i].length; j++) {
                 students[studentCount].setGrades(j, mockGrades[i][j]);
             }
-
             studentCount++;
         }
     }

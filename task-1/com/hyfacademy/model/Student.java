@@ -2,36 +2,33 @@ package com.hyfacademy.model;
 
 import com.hyfacademy.util.GradeUtils;
 
-public class Student {
-    private String name;
-    private String studentId;
+public class Student extends User{
     private int[] grades = new int[5];
     private static int totalStudents;
+    private int[] enrolledCourses = new int[5];
+    private int courseCount;
 
-    public Student(String name) {
-        this.name = name;
-        this.studentId = generateStudentId();
+    public Student(String name, String email) {
+        super(name, email, generateId());
         this.grades = new int[]{0, 0, 0, 0, 0};
         totalStudents++;
     }
 
-    private String generateStudentId(){
+    private static String generateId(){
         int id = totalStudents + 1;
         if (id >= 100) {
-            return "HYF-" + id;
+            return "STU-" + id;
         } else if (id >= 10) {
-            return "HYF-0" + id;
+            return "STU-0" + id;
         } else {
-            return "HYF-00" + id;
+            return "STU-00" + id;
         }
     }
 
-    public String getStudentId(){
-        return this.studentId;
-    }
 
-    public String getName(){
-        return this.name;
+    @Override
+    public String getRole() {
+        return "";
     }
 
     public int[] getGrades() {
@@ -51,7 +48,7 @@ public class Student {
         return true;
     }
 
-
+    @Override
     public String toString(){
 
         double average = GradeUtils.calculateAverage(this.grades);
@@ -60,7 +57,7 @@ public class Student {
             pass = "FAIL";
         }
         String name = getName();
-        String studentId = getStudentId();
+        String studentId = getUserId();
         return "[" + studentId + "] " + name + " — Avg: " + average + " — " + pass;
     }
 
