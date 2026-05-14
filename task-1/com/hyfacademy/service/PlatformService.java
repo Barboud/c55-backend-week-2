@@ -15,7 +15,6 @@ public class PlatformService {
     private final Scanner scanner = new Scanner(System.in);
 
     public void run() {
-        loadDummyData();
         boolean running = true;
         while (running) {
             System.out.println("\n╔══════════════════════════════════════════╗");
@@ -197,59 +196,4 @@ public class PlatformService {
         return null;
     }
 
-
-
-    private void loadDummyData() {
-
-        // ── الكورسات ──────────────────────────────
-        SelfPacedCourse c1 = new SelfPacedCourse("Java Basics", 10, 40);
-        SelfPacedCourse c2 = new SelfPacedCourse("HTML & CSS", 10, 25);
-        LiveCohortCourse c3 = new LiveCohortCourse("React Bootcamp", 5, "2025-02-01", "2025-04-30");
-        courses[courseCount++] = c1;
-        courses[courseCount++] = c2;
-        courses[courseCount++] = c3;
-
-        // ── المدرسين ──────────────────────────────
-        Mentor m1 = new Mentor("Sara Ahmed", "sara@hyf.be", "JavaScript");
-        Mentor m2 = new Mentor("Karim Nasser", "karim@hyf.be", "Java");
-        mentors[mentorCount++] = m1;
-        mentors[mentorCount++] = m2;
-
-        // تعيين مدرس للكورس المباشر
-        c3.assignMentor(m1);
-
-        // ── الطلاب ────────────────────────────────
-        Student s1 = new Student("Ali Hassan", "ali@gmail.com");
-        Student s2 = new Student("Mona Khalid", "mona@gmail.com");
-        Student s3 = new Student("Omar Saeed", "omar@gmail.com");
-        Student s4 = new Student("Lina Yousef", "lina@gmail.com");
-        students[studentCount++] = s1;
-        students[studentCount++] = s2;
-        students[studentCount++] = s3;
-        students[studentCount++] = s4;
-
-        // ── التسجيل في الكورسات ───────────────────
-        c1.enrol(s1); s1.enrol(c1);
-        c1.enrol(s2); s2.enrol(c1);
-        c1.enrol(s3); s3.enrol(c1);
-
-        c2.enrol(s2); s2.enrol(c2);
-        c2.enrol(s4); s4.enrol(c2);
-
-        c3.enrol(s1); s1.enrol(c3);
-        c3.enrol(s4); s4.enrol(c3);
-
-        // ── نسب التقدم ────────────────────────────
-        c1.updateProgress(s1, 80);
-        c1.updateProgress(s2, 55);
-        c1.updateProgress(s3, 30);
-
-        c2.updateProgress(s2, 90);
-        c2.updateProgress(s4, 45);
-
-        c3.updateProgress(s1, 70);
-        c3.updateProgress(s4, 60);
-
-        System.out.println("✓ تم تحميل البيانات التجريبية بنجاح.\n");
-    }
 }
