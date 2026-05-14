@@ -5,7 +5,7 @@ public class CourseFullException extends EnrolmentException{
     private final int maxCapacity;
 
     public CourseFullException(String courseName, int maxCapacity) {
-        super("Course "+ courseName +" is full (max: " + maxCapacity +" students)");
+        super("Course '"+ courseName +"' is full (max: " + maxCapacity +" students)");
         this.courseName = courseName;
         this.maxCapacity = maxCapacity;
     }

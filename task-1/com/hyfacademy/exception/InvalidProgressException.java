@@ -7,4 +7,8 @@ public class InvalidProgressException extends EnrolmentException {
     super("Progress must be between 0 and 100, but received: " + attemptedValue + ".");
         this.attemptedValue = attemptedValue;
     }
+
+    public int getAttemptedValue() {
+        return attemptedValue;
+    }
 }

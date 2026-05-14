@@ -1,16 +1,16 @@
 package com.hyfacademy.model;
 
-import com.hyfacademy.util.GradeUtils;
+import com.hyfacademy.exception.AlreadyEnrolledException;
+import com.hyfacademy.exception.EnrolmentException;
 
-public class Student extends User{
-    private int[] grades = new int[5];
+public class Student extends User {
+
     private static int totalStudents;
-    private int[] enrolledCourses = new int[5];
+    private Course[] enrolledCourses = new Course[5];
     private int courseCount;
 
     public Student(String name, String email) {
         super(name, email, generateId());
-        this.grades = new int[]{0, 0, 0, 0, 0};
         totalStudents++;
     }
 
@@ -25,40 +25,45 @@ public class Student extends User{
         }
     }
 
-
     @Override
     public String getRole() {
-        return "";
+        return "STUDENT";
     }
 
-    public int[] getGrades() {
-        return grades;
-    }
 
-    public boolean setGrades(int moduleIndex, int grade) {
-
-        if (moduleIndex > 4) {
-            System.out.println("moduleIndex must be between 0–4");
-            return false;
-        } else if (grade > 100 || grade < 0) {
-            System.out.println("Grade must be between 0–100");
-            return false;
+    public void enrol(Course course) {
+        // adds to enrolledCourses; throws AlreadyEnrolledException if already enrolled, EnrolmentException if the student's own course list is full (5 courses max)
+        for (int i = 0; i < courseCount; i++) {
+            if (enrolledCourses[i].equals(course)) {
+                throw new AlreadyEnrolledException(this.getName(), course.getCourseName());
+            }
         }
-        this.grades[moduleIndex] = grade;
-        return true;
-    }
 
-    @Override
-    public String toString(){
-
-        double average = GradeUtils.calculateAverage(this.grades);
-        String pass = "PASS";
-        if (!GradeUtils.isPassing(average)) {
-            pass = "FAIL";
+        if (courseCount >= 5) {
+            throw new EnrolmentException("Student's enrolment limit reached (max: 5 courses)");
         }
-        String name = getName();
-        String studentId = getUserId();
-        return "[" + studentId + "] " + name + " — Avg: " + average + " — " + pass;
+
+        enrolledCourses[courseCount] = course;
+        courseCount++;
     }
 
+    public Course[] getCourses() {
+        return enrolledCourses;
+    }
+
+    public int getCourseCount() {
+        return courseCount;
+    }
+
+
+    public int getProgress(String courseName) {
+        // returns the student's progress in that course (0–100); throws EnrolmentException if not enrolled
+        for (int i = 0; i < courseCount; i++) {
+            if (enrolledCourses[i].getCourseName().equals(courseName)) {
+
+                return enrolledCourses[i].getStudentProgress(this);
+            }
+        }
+        throw new EnrolmentException( getName() + " is not enrolled in course: " + courseName);
+    }
 }
