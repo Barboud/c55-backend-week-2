@@ -1,9 +1,11 @@
 package com.hyfacademy.model;
 
-public class SelfPacedCourse extends Course {
+import com.hyfacademy.service.Reportable;
+
+public class SelfPacedCourse extends Course implements Reportable {
     public int estimatedHours;
 
-    SelfPacedCourse(String courseName, int maxStudents, int estimatedHours) {
+    public SelfPacedCourse(String courseName, int maxStudents, int estimatedHours) {
         super(courseName, maxStudents);
         this.estimatedHours = estimatedHours;
     }
@@ -16,5 +18,18 @@ public class SelfPacedCourse extends Course {
     @Override
     public String getScheduleInfo() {
         return "Estimated: "+ estimatedHours +" hours — complete at your own pace";
+    }
+
+    @Override
+    public void generateReport() {
+        System.out.println("══════════════════════════════════════════");
+        System.out.println("  COURSE REPORT — Self-Paced");
+        System.out.println("══════════════════════════════════════════");
+        System.out.println("  ID          : " + getCourseId());
+        System.out.println("  Name        : " + getCourseName());
+        System.out.println("  Capacity    : " + capacityStatus());
+        System.out.println("  Est. Hours  : " + estimatedHours);
+
+        printStudentsTable();
     }
 }

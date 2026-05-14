@@ -1,11 +1,10 @@
 package com.hyfacademy;
-import com.hyfacademy.service.GradeService;
+
+import com.hyfacademy.service.PlatformService;
 
 public class Main {
     public static void main(String[] args) {
-        GradeService service = new GradeService();
+        PlatformService service = new PlatformService();
         service.run();
-
-
     }
 }

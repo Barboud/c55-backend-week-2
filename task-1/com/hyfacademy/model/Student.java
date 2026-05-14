@@ -34,7 +34,7 @@ public class Student extends User {
     public void enrol(Course course) {
         // adds to enrolledCourses; throws AlreadyEnrolledException if already enrolled, EnrolmentException if the student's own course list is full (5 courses max)
         for (int i = 0; i < courseCount; i++) {
-            if (enrolledCourses[i].equals(course)) {
+            if (enrolledCourses[i].getCourseId().equals(course.getCourseId())) {
                 throw new AlreadyEnrolledException(this.getName(), course.getCourseName());
             }
         }
